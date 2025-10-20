@@ -1,0 +1,15 @@
+{
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "ms-python.black-formatter",
+  "editor.autoIndent": "brackets",
+  "editor.indentSize": "tabSize",
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.indentSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+}

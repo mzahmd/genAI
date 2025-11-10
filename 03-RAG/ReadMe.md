@@ -15,3 +15,14 @@ Um Dokumente zu verarbeiten und für ein RAG-System nutzbar zu machen, folgt man
 3. **Langchain**: Der extrahierte Text wird in kleinere Abschnitte (Chunks) unterteilt, um ihn effizient verarbeiten zu können.
 4. **Azure OpenAI**: Diese Textabschnitte werden in Vektoren umgewandelt, um sie für die KI zugänglich und analysierbar zu machen.
 5. **JSON**: Die Vektoren werden dann im JSON-Format gespeichert, um sie für spätere Abfragen oder die Nutzung im RAG-Prozess verfügbar zu halten.
+
+## RAG on AzureAI Search
+Zur effizienten Suche und Abfrage relevanter Textinformationen wird Azure AI Search verwendet.
+Diese Lösung ist leistungsfähiger und skalierbarer als klassische Bibliotheken wie lunr (Python) und bietet:
+
+<ul>
+  <li>Semantische Suche auf Basis von Vektoren
+  <li>Skalierbare Indexierung großer Textmengen
+  <li>Integration mit Azure OpenAI für kontextuelle Generierung
+</ul>
+

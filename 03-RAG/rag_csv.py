@@ -36,20 +36,20 @@ if __name__ == "__main__":
   print("Type 'exit' to quit.\n\n")
 
   messages = []
-  # user_input = input("User: ")
+  user_input = input("User: ")
 
-  # while user_input.strip().lower() != "exit":
+  while user_input.strip().lower() != "exit":
     
-  #   # history tracking
-  #   messages.append({"role": "user", "parts": [{"text": user_input}]})
+    # history tracking
+    messages.append({"role": "user", "parts": [{"text": user_input}]})
 
-  #   ai_response = generate_response(messages)
+    ai_response = generate_response(messages)
     
-  #   # history tracking
-  #   messages.append({"role": "model", "parts": [{"text": ai_response}]})
+    # history tracking
+    messages.append({"role": "model", "parts": [{"text": ai_response}]})
     
-  #   print(f"AI: {ai_response}")
+    print(f"AI: {ai_response}")
     
-  #   user_input = input("User: ")
+    user_input = input("User: ")
 
   read_csv_file()

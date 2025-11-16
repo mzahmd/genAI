@@ -3,3 +3,4 @@ num.py
 PowerPoint/
 *.txt
 .venv/
+__pycache__

@@ -16,4 +16,3 @@ while user_input.strip().lower() != "exit":
     )
     print(f"AI: {response.text}")
     user_input = input("User: ")
-

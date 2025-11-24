@@ -19,7 +19,6 @@ def generate_response(prompt: str) -> str:
   response = client.models.generate_content(
     model="gemini-2.5-flash",
     contents=prompt,
-    messages=[{"role": "system", "parts": [{"text": SYSTEM_MESSAGE}]}],
   )
   return response.text.strip()
 
@@ -41,31 +40,39 @@ index = lunr(ref="id", fields=["body"], documents=documents)
 if __name__ == "__main__":
   print("Type 'exit' to quit.\n\n")
 
-  messages = []
+  messages = [{"role": "model", "parts": [{"text": SYSTEM_MESSAGE}]}]
   user_input = input("User: ")
   
-  restults = index.search(user_input)
-  print(restults)
+  # restults = index.search(user_input)
+  # # print(restults)
 
-  matching_rows = [csv_data[int(result["ref"])] for result in restults]
-  print(matching_rows)
+  # matching_rows = [csv_data[int(result["ref"])] for result in restults]
+  # # print(matching_rows)
 
-  matches_table = " | ".join(csv_data[0]) + "\n" + " | ".join(" --- " for _ in range(len(csv_data[0]))) + "\n"
-  matches_table += "\n".join(" | ".join(row) for row in matching_rows)
-  print(matches_table)
+  # matches_table = " | ".join(csv_data[0]) + "\n" + " | ".join(" --- " for _ in range(len(csv_data[0]))) + "\n"
+  # matches_table += "\n".join(" | ".join(row) for row in matching_rows)
+  # # print(matches_table)
 
-  # while user_input.strip().lower() != "exit":
+  while user_input.strip().lower() != "exit":
     
-  #   index.search(user_input)
-    
-  #   # history tracking
-  #   messages.append({"role": "user", "parts": [{"text": user_input}]})
+    restults = index.search(user_input)
 
-  #   ai_response = generate_response(messages)
+    matching_rows = [csv_data[int(result["ref"])] for result in restults]
+
+    matches_table = " | ".join(csv_data[0]) + "\n" + " | ".join(" --- " for _ in range(len(csv_data[0]))) + "\n"
+    matches_table += "\n".join(" | ".join(row) for row in matching_rows)
+    print(f"{matches_table}\n")
+
+    messages.append({"role": "user", "parts": [{"text": f"Sources: {matches_table}"}]})
     
-  #   # history tracking
-  #   messages.append({"role": "model", "parts": [{"text": ai_response}]})
+    # history tracking
+    messages.append({"role": "user", "parts": [{"text": user_input}]})
+
+    ai_response = generate_response(messages)
     
-  #   print(f"AI: {ai_response}")
+    # history tracking
+    messages.append({"role": "model", "parts": [{"text": ai_response}]})
     
-  #   user_input = input("User: ")
+    print(f"AI: {ai_response}")
+    
+    user_input = input("User: ")

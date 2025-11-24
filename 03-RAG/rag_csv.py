@@ -18,19 +18,19 @@ def generate_response(prompt: str) -> str:
   return response.text.strip()
 
 
-def read_csv_file():
-  with open("hybrid.csv", 'r', encoding='utf-8') as file:
-    csv_reader = csv.reader(file, delimiter=',')
-    csv_data = list(csv_reader)
-    # print(csv_reader)
-    # print(list(csv_reader))
+with open("hybrid.csv", 'r', encoding='utf-8') as file:
+  csv_reader = csv.reader(file, delimiter=',')
+  csv_data = list(csv_reader)
+  # print(csv_reader)
+  # print(csv_data)
 
-  documents = [{"id": i, "body": " ".join(row)} for i, row in enumerate(csv_data)]
-  print(documents[:2])
+documents = [{"id": i, "body": " ".join(row)} for i, row in enumerate(csv_data)]
+print(documents[:2])
 
-  # index = lunr(ref="id", fields=("body",), documents=documents)
-  index = lunr(ref="id", fields=["body"], documents=documents)
-  print(index)
+# index = lunr(ref="id", fields=("body",), documents=documents)
+index = lunr(ref="id", fields=["body"], documents=documents)
+print(index)
+
 
 if __name__ == "__main__":
   print("Type 'exit' to quit.\n\n")
@@ -38,18 +38,18 @@ if __name__ == "__main__":
   messages = []
   user_input = input("User: ")
 
-  while user_input.strip().lower() != "exit":
-    
-    # history tracking
-    messages.append({"role": "user", "parts": [{"text": user_input}]})
+  print(index.search(user_input))
 
-    ai_response = generate_response(messages)
+  # while user_input.strip().lower() != "exit":
     
-    # history tracking
-    messages.append({"role": "model", "parts": [{"text": ai_response}]})
-    
-    print(f"AI: {ai_response}")
-    
-    user_input = input("User: ")
+  #   # history tracking
+  #   messages.append({"role": "user", "parts": [{"text": user_input}]})
 
-  read_csv_file()
+  #   ai_response = generate_response(messages)
+    
+  #   # history tracking
+  #   messages.append({"role": "model", "parts": [{"text": ai_response}]})
+    
+  #   print(f"AI: {ai_response}")
+    
+  #   user_input = input("User: ")
